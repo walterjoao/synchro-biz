@@ -1,73 +1,45 @@
-# Welcome to your Lovable project
+# Synchro Biz
 
-## Project info
+A "complete business management platform" SaaS: workspaces, projects and tasks today, with a wider ERP-style module list on the landing page.
 
-**URL**: https://lovable.dev/projects/a87145c2-d5b6-435a-a675-60b710157974
+Originally created with [Lovable](https://lovable.dev/projects/a87145c2-d5b6-435a-a675-60b710157974); changes pushed here sync back to Lovable.
 
-## How can I edit this code?
+## What works today
 
-There are several ways of editing your application.
+- Email/password sign-up and sign-in (`/auth`, Supabase auth)
+- Dashboard (`/dashboard`): create workspaces, projects and tasks, with workspace membership and roles
 
-**Use Lovable**
+## Marketing site / roadmap
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/a87145c2-d5b6-435a-a675-60b710157974) and start prompting.
+The landing page (`/`) advertises these modules; most are not built yet: multi-workspace, authentication, payment and billing, project management, team collaboration, staff workload, payroll, accounting and bookkeeping, HR, warehouse, sales and POS, purchasing, AI project analyzer, AI chatbot, automation hub, cyber security, audit logs, access control.
 
-Changes made via Lovable will be committed automatically to this repo.
+Pricing shown: Starter $29, Professional $79, Enterprise $199.
 
-**Use your preferred IDE**
+## Tech stack
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Vite 5, React 18, TypeScript, Tailwind CSS 3, shadcn/ui (Radix), React Router 6, TanStack Query, Recharts, Zod, Supabase.
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Database (Supabase / Postgres, row-level security on)
 
-Follow these steps:
+- enum `app_role`: `owner`, `admin`, `manager`, `employee`
+- `profiles`, `workspaces`, `workspace_members`, `projects`, `tasks`
+- Policies limit access to workspaces the user belongs to; only owners manage members and workspace settings.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+Migrations are in `supabase/migrations/`.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## Getting started
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```bash
+npm install
 npm run dev
+npm run build
+npm run lint
 ```
 
-**Edit a file directly in GitHub**
+Environment (`.env`, committed with the Lovable project; public/publishable values):
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/a87145c2-d5b6-435a-a675-60b710157974) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+| Variable | Purpose |
+|---|---|
+| `VITE_SUPABASE_URL` | Supabase project URL |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | Supabase anon/publishable key |
+| `VITE_SUPABASE_PROJECT_ID` | Supabase project id |
